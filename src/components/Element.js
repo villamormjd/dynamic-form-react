@@ -2,8 +2,7 @@ import React from 'react'
 import Input from './elements/Input'
 import Select from './elements/Select'
 
-const Element = ({field: field, disabled }) => {
-    console.log("DISABLED", disabled)
+const Element = ({field, disabled, response }) => {
     switch(field["type"]){
         case 'select':
             return <Select
@@ -13,6 +12,7 @@ const Element = ({field: field, disabled }) => {
             type={field["type"]}
             value={field["value"]}
             options = {field["options"]}
+            response = {response}
             />
             break;
         default:
@@ -22,6 +22,7 @@ const Element = ({field: field, disabled }) => {
             fieldName={field["fieldName"]}
             type={field["type"]}
             value={field["value"]}
+            response = {response}
             />
             break;
     }

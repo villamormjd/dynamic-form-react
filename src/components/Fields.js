@@ -17,6 +17,9 @@ const Fields = () =>{
             .then(res => {
                 setFields(res.data)
             })
+            .catch(error => {
+                console.log("ERROR", error)
+            })
     }, [urlAPI])
 
     const handleSubmit = (e) => {
@@ -32,6 +35,10 @@ const Fields = () =>{
                 setResponse(res.data)
                 setDisabled(false)
             },[disabled])
+            .catch(error => {
+                setResponse(error.response.data)
+                setDisabled(false)
+            })
         setIsSuccess(true)
 
     }
@@ -40,7 +47,7 @@ const Fields = () =>{
         if(typeof(event) !== 'undefined'){
             const newFields = {...fields}
             newFields.data.forEach(field=>{
-               const{fieldName, type, value} = field;
+               const{fieldName} = field;
                if(id === fieldName){
                     field["value"] = event.target.value
                }
@@ -53,7 +60,7 @@ const Fields = () =>{
         <div>
             <FormContext.Provider value={{ handleChange }}>
                 {fields["data"] ? fields["data"].map((field, i) =>
-                <Element key={i} disabled={disabled} field={field} />): <h2> Loading Data ... </h2>}
+                <Element key={i} disabled={disabled} field={field} response={response} />): <h2> Loading Data ... </h2>}
                 {fields["data"] ? <button type="submit" className="btn btn-primary"
                 onClick={(e) => handleSubmit(e)} disabled={disabled}>Submit</button> : null}
 

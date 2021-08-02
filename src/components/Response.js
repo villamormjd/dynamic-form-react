@@ -1,19 +1,16 @@
 import React from 'react'
+import Message from '../components/elements/Message'
 
 const Response = ({response}) => {
 
-    const style = {
-        color: 'black'
-    }
 
-    return response !== null ? (
+    return response !== null  ? (
         <div>
-            <h2> Response </h2>
-            <code style={style}> {JSON.stringify(response)} </code>
+            <Message response={response} />
         </div>
     ):(
         <div>
-            <h2> Loading Data... </h2>
+            <h2> Loading Data </h2>
         </div>
     )
 }
